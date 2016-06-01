@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: BuildConfig
+metadata:
+  name: gitblit
+  labels:
+    name: gitblit
+spec:
+  source:
+    type: Git
+    git:
+      uri: https://github.com/ulx-demo/gitblit
+  strategy:
+    type: Docker
+    dockerStrategy:
+      forcePull: true
+      from:
+        kind: ImageStreamTag
+        name: rhel7:latest
+        namespace: openshift
+  output:
+    to:
+      kind: ImageStreamTag
+      name: gitblit:latest
+  triggers:
+  - type: ImageChange

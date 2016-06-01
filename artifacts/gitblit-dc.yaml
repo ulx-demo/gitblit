@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: DeploymentConfig
+metadata:
+  name: gitblit
+  labels:
+    name: gitblit
+spec:
+  replicas: 1
+  selector:
+    name: gitblit
+  template:
+    metadata:
+      labels:
+        name: gitblit
+    spec:
+      containers:
+      - name: gitblit
+        image: gitblit:latest
+        env:
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /opt/gitblit-data
+          name: gitblit-data
+      volumes:
+      - name: gitblit-data
+        emptyDir: {}
+  strategy:
+    type: Recreate
+  triggers:
+  - type: ImageChange
+    imageChangeParams:
+      automatic: true
+      containerNames:
+      - gitblit
+      from:
+        kind: ImageStreamTag
+        name: gitblit:latest
+  - type: ConfigChange
