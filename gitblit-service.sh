@@ -29,11 +29,11 @@ if [ ! "$(ls -A $GITBLIT_DATA)" ]; then
 fi
 
 update_config "server.httpPort=8080"
-update_config "server.httpsPort=8443"
+update_config "server.httpsPort=-1"
 update_config "server.redirectToHttpsPort=false"
 update_config "git.sshPort=-1"
 update_config "git.daemonPort=-1"
-update_config "git.acceptedPushTransports=HTTPS"
+update_config "git.acceptedPushTransports=HTTP"
 update_config "git.defaultAccessRestriction=VIEW"
 update_config "git.repositoriesFolder=${GITBLIT_DATA}/git"
 update_config "web.canonicalUrl=${GITBLIT_URL}"
