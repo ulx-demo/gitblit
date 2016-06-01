@@ -2,7 +2,7 @@ FROM rhel7:latest
 MAINTAINER Balázs Miklós <mbalazs@ulx.hu>
 
 ADD gitblit-service.sh /opt/
-RUN yum --enablerepo=rhel-7-server-thirdparty-oracle-java-rpms -y install java-1.8.0-oracle-headless tar \
+RUN yum --enablerepo=rhel-7-server-thirdparty-oracle-java-rpms -y install java-1.8.0-oracle tar \
   && yum clean all \
   && rm -rf /var/cache/yum \
   && curl -L -O http://dl.bintray.com/gitblit/releases/gitblit-1.7.1.tar.gz \
