@@ -12,7 +12,16 @@ import org.slf4j.Logger
 
 // Indicate we have started the script
 logger.info("openshift hook triggered by ${user.username} for ${repository.name}")
-def triggerUrl = repository.customFields.openshiftTrigger
+def triggerUrl = repository.customFields.openshiftTrigger.replaceAll("master.ose.ulx.hu:8443", "kubernetes.default.svc")
 
 // trigger the build
-new URL(triggerUrl).getContent()
+def _url = new URL(triggerUrl)
+def _con = _url.openConnection()
+_con.setRequestMethod("POST")
+_con.setRequestProperty("User-Agent", "Gitblit")
+
+// send post request
+_con.setDoOutput(true)
+
+logger.info("OpenShift response code: ${_con.responseCode}")
+
