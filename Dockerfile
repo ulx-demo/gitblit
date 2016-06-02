@@ -20,6 +20,7 @@ WORKDIR ${GITBLIT_HOME}
 VOLUME ${GITBLIT_DATA}
 
 ADD log4j.properties ${GITBLIT_HOME}/
+ADD openshift.groovy ${GITBLIT_HOME}/groovy/
 
 EXPOSE 8080
 EXPOSE 8443

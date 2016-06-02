@@ -55,7 +55,8 @@ update_config "mail.password=$MAIL_PASSWORD"
 # TODO: több Jenkins server lesz, a jenkinsServer URL is egy változó legyen!
 update_config "groovy.jenkinsServer=http://jenkins.apps.eir.ulx.hu"
 update_config "groovy.scriptsFolder=/opt/gitblit-data/groovy"
-update_config "groovy.customFields=\"openShiftProject=OpenShift Project Name\" \"openShiftBuildConfig=OpenShift BuildConfig name\" \"openShiftSecret=OpenShift Webhook Trigger Secret\""
+#update_config "groovy.customFields=\"openShiftProject=OpenShift Project Name\" \"openShiftBuildConfig=OpenShift BuildConfig name\" \"openShiftSecret=OpenShift Webhook Trigger Secret\""
+update_config "groovy.customFields=\"openshiftTrigger=OpenShift Build Trigger\""
 
 java -server -Xms1024M -Xmx1024M -Djawa.awt.headless=true \
   -Dlog4j.configuration=file://${GITBLIT_HOME}/log4j.properties \
