@@ -2,6 +2,7 @@ FROM rhel7:latest
 MAINTAINER Balázs Miklós <mbalazs@ulx.hu>
 
 ADD gitblit-service.sh /opt/
+ADD master.crt /tmp/
 RUN yum --enablerepo=rhel-7-server-thirdparty-oracle-java-rpms -y install java-1.8.0-oracle tar \
   && yum clean all \
   && rm -rf /var/cache/yum \
@@ -11,7 +12,8 @@ RUN yum --enablerepo=rhel-7-server-thirdparty-oracle-java-rpms -y install java-1
   && mkdir -p /opt/gitblit-data \
   && chmod g+rwX /opt/gitblit-data \
   && chmod g+rwX /opt/gitblit \
-  && chmod +x /opt/gitblit-service.sh
+  && chmod +x /opt/gitblit-service.sh \
+  && keytool -noprompt -storepass changeit -keystore /usr/lib/jvm/jre/lib/security/cacerts -import -file /tmp/master.crt -alias eir -trustcacerts
 
 ENV GITBLIT_HOME /opt/gitblit
 ENV GITBLIT_DATA /opt/gitblit-data
